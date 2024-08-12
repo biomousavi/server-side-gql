@@ -4,8 +4,8 @@ import {
   ApolloServerPluginLandingPageLocalDefault,
   ApolloServerPluginLandingPageProductionDefault,
 } from '@apollo/server/plugin/landingPage/default'
-import { addMocksToSchema } from '@graphql-tools/mock'
-import { makeExecutableSchema } from '@graphql-tools/schema'
+// import { addMocksToSchema } from '@graphql-tools/mock'
+// import { makeExecutableSchema } from '@graphql-tools/schema'
 import { NextRequest } from 'next/server'
 import typeDefs from './schema'
 import resolvers from './resolvers'
