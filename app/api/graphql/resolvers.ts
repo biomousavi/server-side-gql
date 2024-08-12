@@ -12,11 +12,22 @@ export const resolvers = {
     },
   },
   Mutation: {
-    signin: async (_, { input }, ctx) => {
+    signin: async (_: any, { input }: any) => {
       const data = await signin(input)
 
       if (!data || !data.user || !data.token) {
         throw new GraphQLError('UNAUTHORIZED', {
+          extensions: { code: 'AUTH_ERROR' },
+        })
+      }
+
+      return { ...data.user, token: data.token }
+    },
+    createUser: async (_: any, args: any) => {
+      const data = await signup(args.input)
+
+      if (!data || !data.user || !data.token) {
+        throw new GraphQLError('could not create user', {
           extensions: { code: 'AUTH_ERROR' },
         })
       }
