@@ -1,9 +1,10 @@
 export const schema = `#graphql
 
+
   type User {
     id: ID!
-    name: String!
-    createAt: String!
+    email: String!
+    createdAt: String!
     token: String
   } 
 
@@ -13,6 +14,10 @@ export const schema = `#graphql
   }
 
   type Query {
+    me: User!
+  }
+
+  type Mutation {
     signin(input:AuthInput!): User
     createUser(input:AuthInput!): User
   }
