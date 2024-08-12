@@ -1,10 +1,7 @@
 const schema = `#graphql
 
-  type user {
-    
-  }
-
   type Query {
+    me: String!
   }
 
 `
