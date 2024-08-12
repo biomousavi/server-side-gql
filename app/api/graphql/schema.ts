@@ -1,5 +1,15 @@
 const schema = `#graphql
 
+  type Tweet {
+    content: String!
+  }
+
+  type Profile {
+    username: String!
+  }
+
+  union SearchResult = Tweet | Profile
+
   interface Character {
     name: String!
     outfit: String!
@@ -25,6 +35,7 @@ const schema = `#graphql
   type Query {
     me: Person!
     characters: [Alien!]!
+    search: [SearchResult]!
   }
 
 `
