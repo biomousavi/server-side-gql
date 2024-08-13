@@ -24,6 +24,7 @@ export const schema = `#graphql
   }
 
 
+
   type User {
     id: ID!
     email: String!
