@@ -91,6 +91,21 @@ export const resolvers = {
 
       return data[0]
     },
+    editIssue: async (_: any, { input }: any, ctx: GQLContext) => {
+      if (!ctx.user) {
+        throw new GraphQLError('UNAUTHORIZED', {
+          extensions: { code: 'AUTH_ERROR' },
+        })
+      }
+
+      const result = await db
+        .update(issues)
+        .set(input)
+        .where(and(eq(issues.userId, ctx.user.id), eq(issues.id, input.id)))
+        .returning()
+
+      return result[0]
+    },
 
     createUser: async (_: any, args: any) => {
       const data = await signup(args.input)
