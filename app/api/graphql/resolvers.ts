@@ -12,6 +12,11 @@ export const resolvers = {
     INPROGRESS: 'inprogress',
     DONE: 'done',
   },
+  User: {
+    issues: (user: any, _: any, ctx: GQLContext) => {
+      return db.query.issues.findMany({ where: eq(issues.userId, user.id) })
+    },
+  },
   Issue: {
     user: (issue: any, _: any, ctx: GQLContext) => {
       if (!ctx.user) {
