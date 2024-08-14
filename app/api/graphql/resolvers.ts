@@ -107,6 +107,14 @@ export const resolvers = {
       return result[0]
     },
 
+    deleteIssue: async (_: any, { id }: any, ctx: GQLContext) => {
+      if (!ctx.user)
+        throw new GraphQLError('UNAUTHORIZED', { extensions: { code: 401 } })
+
+      await db.delete(issues).where(eq(issues.id, id))
+      return id
+    },
+
     createUser: async (_: any, args: any) => {
       const data = await signup(args.input)
 
