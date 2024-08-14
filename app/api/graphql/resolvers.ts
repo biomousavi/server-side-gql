@@ -26,7 +26,7 @@ export const resolvers = {
     },
   },
   Query: {
-    me: (_: any, __: any, ctx: GQLContext) => {
+    me: (_: any, __: any, ctx: GQLContext ) => {
       return ctx.user
     },
   },
