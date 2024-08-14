@@ -26,8 +26,37 @@ export const resolvers = {
     },
   },
   Query: {
-    me: (_: any, __: any, ctx: GQLContext ) => {
+    me: (_: any, __: any, ctx: GQLContext) => {
       return ctx.user
+    },
+    issues: async (_: any, { input }: any, ctx: GQLContext) => {
+      if (!ctx.user) {
+        throw new GraphQLError('UNAUTHORIZED', {
+          extensions: { code: 'AUTH_ERROR' },
+        })
+      }
+
+      const andFilters = [eq(issues.userId, ctx.user.id)]
+      if (input && Array.isArray(input.statuses)) {
+        const statusFilters = input.statuses.map((status: any) =>
+          eq(issues.status, status)
+        )
+        andFilters.push(or(...statusFilters)!)
+      }
+
+      const data = await db.query.issues.findMany({
+        where: and(...andFilters),
+        orderBy: [
+          asc(sql`case ${issues.status}
+        when "backlog" then 1
+        when "inprogress" then 2
+        when "done" then 3
+      end`),
+          desc(issues.createdAt),
+        ],
+      })
+
+      return data
     },
   },
   Mutation: {
