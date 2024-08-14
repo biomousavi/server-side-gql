@@ -38,7 +38,7 @@ export const schema = `#graphql
   }
 
   input issuesFilterInput {
-    statuses: [Issue!]
+    statuses: [IssueStatus!]
   }
 
   type Query {
