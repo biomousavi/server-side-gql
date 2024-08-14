@@ -16,6 +16,14 @@ export const schema = `#graphql
     status: IssueStatus
   }
 
+
+  input EditIssueInput {
+    id: ID!
+    status: IssueStatus
+    content: String
+    name: String
+  }
+
   enum IssueStatus {
     BACKLOG
     TODO
@@ -50,5 +58,6 @@ export const schema = `#graphql
     signin(input:AuthInput!): User
     createUser(input:AuthInput!): User
     createIssue(input:CreateIssueInput!): Issue
+    editIssue(input:EditIssueInput!): Issue!  
   }
 `
