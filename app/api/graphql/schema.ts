@@ -59,5 +59,6 @@ export const schema = `#graphql
     createUser(input:AuthInput!): User
     createIssue(input:CreateIssueInput!): Issue
     editIssue(input:EditIssueInput!): Issue!  
+    deleteIssue(id: ID!): ID!
   }
 `
